@@ -1,4 +1,4 @@
-# Backend - Cờ Cá Ngựa
+# ludo-be backend
 
 Backend realtime bằng Node.js cho game Cờ Cá Ngựa 4.0.
 
