@@ -1,6 +1,8 @@
 const express = require("express");
 const { checkDbConnection } = require("../src/db/client");
 const roomRoutes = require("../src/routes/roomRoutes");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("../src/config/swagger");
 
 const app = express();
 
@@ -28,5 +30,7 @@ app.get("/api/db-status", async (_req, res) => {
     });
   }
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 module.exports = app;

@@ -11,7 +11,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:4000",
+                url: "/api", // ✅ QUAN TRỌNG cho Vercel
             },
         ],
         components: {
@@ -35,9 +35,7 @@ const options = {
                         },
                         players: {
                             type: "array",
-                            items: {
-                                $ref: "#/components/schemas/Player",
-                            },
+                            items: { $ref: "#/components/schemas/Player" },
                         },
                         currentTurn: { type: "integer" },
                         diceValue: { type: "integer" },
@@ -47,8 +45,8 @@ const options = {
         },
     },
     apis: [
-        path.join(__dirname, "../index.js"),
-        path.join(__dirname, "../routes/*.js"),
+        path.join(__dirname, "../../src/index.js"),
+        path.join(__dirname, "../../src/routes/*.js"),
     ],
 };
 
