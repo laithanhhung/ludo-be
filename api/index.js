@@ -3,18 +3,19 @@ const { checkDbConnection } = require("../src/db/client");
 const roomRoutes = require("../src/routes/roomRoutes");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("../src/config/swagger");
-const swaggerDist = require("swagger-ui-dist");
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/api/docs", express.static(swaggerDist.getAbsoluteFSPath()));
-
 app.use(
     "/api/docs",
     swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, { explorer: true })
+    swaggerUi.setup(swaggerSpec, {
+      explorer: true,
+      customCssUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css",
+    })
 );
 
 app.get("/api", (_req, res) => {
