@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const http = require("node:http");
 const { Server } = require("socket.io");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 const {
   createRoom,
   getRoom,
@@ -21,12 +23,36 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Health check
+ *     tags: [System]
+ *     responses:
+ *       200:
+ *         description: Server is running
+ */
 app.get("/health", (_, res) => {
   res.json({ ok: true });
 });
 
 app.use("/api", roomRoutes);
 
+/**
+ * @swagger
+ * /api/db-status:
+ *   get:
+ *     summary: Check database connection
+ *     tags: [System]
+ *     responses:
+ *       200:
+ *         description: Database connected
+ *       500:
+ *         description: Database disconnected
+ */
 app.get("/api/db-status", async (_req, res) => {
   try {
     const result = await checkDbConnection();
