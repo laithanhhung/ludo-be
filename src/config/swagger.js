@@ -11,7 +11,7 @@ const options = {
         },
         servers: [
             {
-                url: "/api", // ✅ QUAN TRỌNG cho Vercel
+                url: "/api",
             },
         ],
         components: {

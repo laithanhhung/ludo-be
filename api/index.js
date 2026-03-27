@@ -31,6 +31,7 @@ app.get("/api/db-status", async (_req, res) => {
   }
 });
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/docs", swaggerUi.serve);
+app.get("/api/docs", swaggerUi.setup(swaggerSpec));
 
 module.exports = app;
