@@ -9,44 +9,11 @@ const options = {
             version: "1.0.0",
             description: "API documentation for Ludo Backend",
         },
-        servers: [
-            {
-                url: "/api",
-            },
-        ],
-        components: {
-            schemas: {
-                Player: {
-                    type: "object",
-                    properties: {
-                        id: { type: "string" },
-                        name: { type: "string" },
-                        slotId: { type: "integer" },
-                        ready: { type: "boolean" },
-                    },
-                },
-                Room: {
-                    type: "object",
-                    properties: {
-                        id: { type: "string" },
-                        status: {
-                            type: "string",
-                            enum: ["waiting", "playing", "finished"],
-                        },
-                        players: {
-                            type: "array",
-                            items: { $ref: "#/components/schemas/Player" },
-                        },
-                        currentTurn: { type: "integer" },
-                        diceValue: { type: "integer" },
-                    },
-                },
-            },
-        },
+        servers: [{ url: "/api" }],
     },
     apis: [
-        path.join(__dirname, "../../src/index.js"),
-        path.join(__dirname, "../../src/routes/*.js"),
+        path.resolve(process.cwd(), "src/index.js"),
+        path.resolve(process.cwd(), "src/routes/*.js"),
     ],
 };
 
